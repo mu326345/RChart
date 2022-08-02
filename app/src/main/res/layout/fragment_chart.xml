@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".river.ChartFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.yuyu.riverchart.river.ChartViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/color3_img"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="-16dp" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.price != null ? View.GONE:View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@{viewModel.date}"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2022/04" />
+
+        <ImageView
+            android:id="@+id/price_img"
+            android:layout_width="15dp"
+            android:layout_height="0dp"
+            android:background="@color/red"
+            android:visibility="@{viewModel.price != null ? View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/date_tv"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@+id/color1_img"
+            app:layout_constraintTop_toTopOf="@id/date_tv" />
+
+        <TextView
+            android:id="@+id/price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@{viewModel.price}"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/price_img"
+            app:layout_constraintStart_toEndOf="@id/price_img"
+            app:layout_constraintTop_toTopOf="@id/price_img"
+            tools:text="股價47.1" />
+
+        <ImageView
+            android:id="@+id/color0_img"
+            android:layout_width="15dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/line_color0"
+            android:visibility="@{viewModel.timesValue0 != null ? View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/date_tv"
+            app:layout_constraintTop_toBottomOf="@id/date_tv" />
+
+        <TextView
+            android:id="@+id/color0_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/color0_img"
+            app:layout_constraintStart_toEndOf="@id/color0_img"
+            app:layout_constraintTop_toTopOf="@id/color0_img"
+            tools:text="21.95倍 72.22" />
+
+        <ImageView
+            android:id="@+id/color1_img"
+            android:layout_width="15dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/line_color1"
+            android:visibility="@{viewModel.timesValue1 != null ? View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/color0_tv"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toEndOf="@id/color0_tv"
+            app:layout_constraintTop_toTopOf="@+id/color0_tv" />
+
+        <TextView
+            android:id="@+id/color1_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/color1_img"
+            app:layout_constraintStart_toEndOf="@+id/color1_img"
+            app:layout_constraintTop_toTopOf="@+id/color1_img"
+            tools:text="19.28倍 72.22" />
+
+        <ImageView
+            android:id="@+id/color2_img"
+            android:layout_width="15dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/line_color2"
+            android:visibility="@{viewModel.timesValue2 != null ? View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/color1_tv"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toEndOf="@+id/color1_tv"
+            app:layout_constraintTop_toTopOf="@+id/color1_tv" />
+
+        <TextView
+            android:id="@+id/color2_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/color2_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/color2_img"
+            app:layout_constraintTop_toTopOf="@+id/color2_img"
+            tools:text="16.60倍 72.22" />
+
+        <ImageView
+            android:id="@+id/color3_img"
+            android:layout_width="15dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/line_color3"
+            android:visibility="@{viewModel.timesValue3 != null ? View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/color0_img"
+            app:layout_constraintTop_toBottomOf="@id/color0_img" />
+
+        <TextView
+            android:id="@+id/color3_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/color3_img"
+            app:layout_constraintStart_toEndOf="@id/color3_img"
+            app:layout_constraintTop_toTopOf="@id/color3_img"
+            tools:text="13.93倍 72.22" />
+
+        <ImageView
+            android:id="@+id/color4_img"
+            android:layout_width="15dp"
+            android:layout_height="0dp"
+            android:background="@color/line_color4"
+            android:visibility="@{viewModel.timesValue4 != null ? View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/color3_tv"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/color1_img"
+            app:layout_constraintTop_toTopOf="@id/color3_tv" />
+
+        <TextView
+            android:id="@+id/color4_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/color4_img"
+            app:layout_constraintStart_toEndOf="@id/color4_img"
+            app:layout_constraintTop_toTopOf="@id/color4_img"
+            tools:text="11.25倍 72.22" />
+
+        <ImageView
+            android:id="@+id/color5_img"
+            android:layout_width="15dp"
+            android:layout_height="0dp"
+            android:background="@color/line_color5"
+            android:visibility="@{viewModel.timesValue5 != null ? View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/color4_tv"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/color2_img"
+            app:layout_constraintTop_toTopOf="@id/color4_tv" />
+
+        <TextView
+            android:id="@+id/color5_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/color5_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/color5_img"
+            app:layout_constraintTop_toTopOf="@id/color5_img"
+            tools:text="8.58倍 72.22" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
