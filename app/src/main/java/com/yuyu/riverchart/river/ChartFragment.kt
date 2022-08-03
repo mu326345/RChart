@@ -2,6 +2,7 @@ package com.yuyu.riverchart.river
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,7 +74,7 @@ class ChartFragment : Fragment() {
             initDataSet(lineChart, it)
             initX(lineChart, it.yearMonth)
             initY(lineChart)
-            viewModel.getSelectData(13)
+            viewModel.getSelectData(it.yearMonth.size - 1)
         }
 
         viewModel.timesValue0.observe(viewLifecycleOwner) {
@@ -137,12 +138,12 @@ class ChartFragment : Fragment() {
             data4,
             data5,
             data6,
-            lineDataSet(monthPrice, R.color.red, 1.5f)
+            lineDataSet(monthPrice, R.color.red, DEFAULT_WIDTH)
         )
 
         lineChart.renderer = MyLineLegendRenderer(lineChart, lineChart.animator, lineChart.viewPortHandler)
         lineChart.data = data
-        lineChart.highlightValue(13F, 1)
+        lineChart.highlightValue((list.yearMonth.size - 1).toFloat(), 1)
         lineChart.invalidate()
     }
 
@@ -152,7 +153,7 @@ class ChartFragment : Fragment() {
 
         set.run {
             mode = LineDataSet.Mode.LINEAR
-            lineWidth = 1.5f
+            lineWidth = DEFAULT_WIDTH
             setDrawCircles(false)
             setDrawValues(false)
             setDrawFilled(true)
@@ -162,12 +163,11 @@ class ChartFragment : Fragment() {
             fillFormatter = MyFillFormatter(prevDataSet)
 
             if (prevDataSet == null) {
-                lineWidth = 10F
+                setDrawFilled(false)
+                lineWidth = DIFF_WIDTH
             }
 
-            highLightColor = Color.WHITE
-            highlightLineWidth = 5F
-            setDrawHorizontalHighlightIndicator(false)
+            initHighlight(set)
         }
 
         return set
@@ -183,9 +183,7 @@ class ChartFragment : Fragment() {
             setDrawValues(false)
             set.color = resources.getColor(color, null)
 
-            highLightColor = Color.WHITE
-            highlightLineWidth = 5F
-            setDrawHorizontalHighlightIndicator(false)
+            initHighlight(set)
         }
 
         return set
@@ -197,10 +195,11 @@ class ChartFragment : Fragment() {
         xAxis.run {
             position = XAxis.XAxisPosition.BOTTOM
             textColor = Color.WHITE
-            gridColor = Color.WHITE
-            textSize = 11f
-            labelCount = 6
-            setDrawGridLines(false)
+            gridColor = resources.getColor(R.color.grid, null)
+            textSize = TEXTSIZE
+            setLabelCount(6,false)
+            setCenterAxisLabels(true)
+            setDrawGridLines(true)
         }
 
         val xList: MutableList<String> = ArrayList()
@@ -216,11 +215,26 @@ class ChartFragment : Fragment() {
         val yAxisR = lineChart.axisRight
         yAxisR.run {
             isEnabled = true
-            textSize = 12f
+            textSize = TEXTSIZE
             labelCount = 6
             textColor = Color.WHITE
+            gridColor = resources.getColor(R.color.grid, null)
             setDrawGridLines(true)
             setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
         }
+    }
+
+    private fun initHighlight(set: LineDataSet) {
+        set.run {
+            highLightColor = Color.WHITE
+            highlightLineWidth = resources.getDimensionPixelOffset(R.dimen.highlight_width).toFloat()
+            setDrawHorizontalHighlightIndicator(false)
+        }
+    }
+
+    companion object {
+        val DEFAULT_WIDTH = 1.5f
+        val TEXTSIZE = 12f
+        val DIFF_WIDTH = 10F
     }
 }

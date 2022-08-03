@@ -20,13 +20,15 @@
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lineChart"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/color3_img"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="-16dp" />
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline1"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ProgressBar
             android:layout_width="wrap_content"
@@ -220,6 +222,31 @@
             app:layout_constraintStart_toEndOf="@id/color5_img"
             app:layout_constraintTop_toTopOf="@id/color5_img"
             tools:text="8.58倍 72.22" />
+
+        <TextView
+            android:id="@+id/dollar_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dollar"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:visibility="@{viewModel.price != null ? View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/lineChart"
+            app:layout_constraintEnd_toEndOf="@id/lineChart" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.66" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

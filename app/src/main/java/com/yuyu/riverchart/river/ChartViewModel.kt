@@ -4,13 +4,12 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.yuyu.riverchart.data.NStockData
 import com.yuyu.riverchart.data.RiverChart
-import com.yuyu.riverchart.data.RiverDataItem
 import com.yuyu.riverchart.data.TimesValue
 import com.yuyu.riverchart.repository.IRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.StringBuilder
-import java.sql.Time
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ChartViewModel(val repository: IRepository) : ViewModel() {
 
@@ -63,11 +62,20 @@ class ChartViewModel(val repository: IRepository) : ViewModel() {
         val basePE5 = mutableListOf<Float>()
         val monthPrice = mutableListOf<Float>()
 
-        it.data?.get(0)?.riverData?.forEachIndexed { index, riverDataItem ->
-            if (index <= 13) {
+        val cal = Calendar.getInstance()
+        cal.add(Calendar.MONTH, -55)
+        val startDate5 = cal.time
+
+        it.data?.get(0)?.riverData?.forEach { riverDataItem ->
+            val format = SimpleDateFormat("yyyyMM")
+
+            if (format.parse(riverDataItem.yearMon) >= startDate5) {
+
                 riverDataItem.yearMon?.let { yearMonth.add(0, it) }
                 riverDataItem.averagePrice?.let { monthPrice.add(0, it.toFloat()) }
+
                 riverDataItem.basePricePE?.forEachIndexed { index, PE ->
+
                     when (index) {
                         0 -> basePE0.add(0, PE.toFloat())
                         1 -> basePE1.add(0, PE.toFloat())

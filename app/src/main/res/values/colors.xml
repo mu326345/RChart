@@ -14,4 +14,5 @@
     <color name="line_color4">#7c9bd8</color>
     <color name="line_color5">#4b9596</color>
     <color name="red">#FF0000</color>
+    <color name="grid">#33FFFFFF</color>
 </resources>
