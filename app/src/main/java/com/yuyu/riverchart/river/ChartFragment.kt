@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,6 +22,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.yuyu.riverchart.Application
 import com.yuyu.riverchart.R
 import com.yuyu.riverchart.data.RiverChart
+import com.yuyu.riverchart.data.TimesValue
 import com.yuyu.riverchart.databinding.FragmentChartBinding
 import com.yuyu.riverchart.factory.ViewModelFactory
 
@@ -78,27 +80,27 @@ class ChartFragment : Fragment() {
         }
 
         viewModel.timesValue0.observe(viewLifecycleOwner) {
-            binding.color0Tv.text = "${it.basePE}倍 ${it.basePricePE}"
+            toTimesStr(binding.color0Tv, it)
         }
 
         viewModel.timesValue1.observe(viewLifecycleOwner) {
-            binding.color1Tv.text = "${it.basePE}倍 ${it.basePricePE}"
+            toTimesStr(binding.color1Tv, it)
         }
 
         viewModel.timesValue2.observe(viewLifecycleOwner) {
-            binding.color2Tv.text = "${it.basePE}倍 ${it.basePricePE}"
+            toTimesStr(binding.color2Tv, it)
         }
 
         viewModel.timesValue3.observe(viewLifecycleOwner) {
-            binding.color3Tv.text = "${it.basePE}倍 ${it.basePricePE}"
+            toTimesStr(binding.color3Tv, it)
         }
 
         viewModel.timesValue4.observe(viewLifecycleOwner) {
-            binding.color4Tv.text = "${it.basePE}倍 ${it.basePricePE}"
+            toTimesStr(binding.color4Tv, it)
         }
 
         viewModel.timesValue5.observe(viewLifecycleOwner) {
-            binding.color5Tv.text = "${it.basePE}倍 ${it.basePricePE}"
+            toTimesStr(binding.color5Tv, it)
         }
 
         return binding.root
@@ -230,6 +232,10 @@ class ChartFragment : Fragment() {
             highlightLineWidth = resources.getDimensionPixelOffset(R.dimen.highlight_width).toFloat()
             setDrawHorizontalHighlightIndicator(false)
         }
+    }
+
+    private fun toTimesStr(textView: TextView, data: TimesValue) {
+        textView.text = "${data.basePE}倍 ${data.basePricePE}"
     }
 
     companion object {
