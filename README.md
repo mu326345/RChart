@@ -2,4 +2,5 @@
 
 Practice stock App chart using MPAndroidLine
 
-![](https://i.imgur.com/oSNvx8G.png =250x)
+
+<img src="https://i.imgur.com/U2h6SGB.png" width="323" height="682">
